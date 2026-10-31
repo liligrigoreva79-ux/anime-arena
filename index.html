@@ -2,294 +2,216 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>ANIME ARENA</title>
+    <title>Anime Arena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Russo+One&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Montserrat:wght@500;700&display=swap');
-
-        :root { 
-            --panel-bg: rgba(15, 20, 30, 0.85); 
-            --text: #e0e0e0;
-            --accent: #ff3366;
-            --blue: #00d2ff;
+        :root {
+            --bg: #0f0c29;
+            --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            --panel: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #fff;
+            --text-dim: #a0a0b0;
+            --accent: #ff2a6d;
+            --blue: #05d9e8;
             --gold: #ffd700;
         }
 
         body { 
             font-family: 'Montserrat', sans-serif; 
             margin: 0; padding: 0; 
-            color: var(--text); min-height: 100vh;
-            /* Фон с аниме-пейзажем */
-            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
+            background: var(--bg-gradient);
             background-attachment: fixed;
+            color: var(--text); min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
         }
 
         .header { 
-            display: flex; justify-content: space-between; width: 100%; max-width: 900px; 
-            font-family: 'Russo One', sans-serif; font-size: 28px; margin-top: 20px; margin-bottom: 20px; 
-            align-items: center; color: white; text-shadow: 0 0 10px var(--accent); 
-            padding: 0 20px; box-sizing: border-box;
+            display: flex; justify-content: space-between; width: 100%; max-width: 1100px; 
+            font-family: 'Russo One', sans-serif; font-size: 26px; margin: 20px 0; 
+            align-items: center; padding: 0 20px; box-sizing: border-box;
         }
+        
+        .logo { text-shadow: 0 0 15px var(--accent); }
+        .logo span { color: var(--accent); }
         
         .wallet { 
-            background: var(--panel-bg); border: 2px solid var(--gold); 
-            padding: 10px 20px; border-radius: 8px; color: var(--gold); font-size: 20px;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+            background: rgba(0, 0, 0, 0.5); border: 2px solid var(--gold); 
+            padding: 8px 20px; border-radius: 8px; font-size: 18px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
         }
+        .wallet span { color: var(--gold); }
 
-        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 30px; width: 100%; max-width: 1100px; padding: 0 20px; box-sizing: border-box; }
         .tab-btn { 
-            background: var(--panel-bg); color: #888; border: 2px solid transparent; 
+            background: rgba(0,0,0,0.4); color: var(--text-dim); border: 1px solid var(--border); 
             padding: 12px 30px; font-family: 'Russo One', sans-serif; font-size: 16px;
-            cursor: pointer; border-radius: 8px; transition: 0.3s; text-transform: uppercase;
+            cursor: pointer; transition: 0.3s; border-radius: 8px; text-transform: uppercase;
         }
         .tab-btn.active { 
-            color: white; border-color: var(--accent); 
-            box-shadow: 0 0 15px rgba(255, 51, 102, 0.3); background: rgba(255, 51, 102, 0.1);
+            background: var(--panel); color: white; border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
         }
 
-        .screen { display: none; width: 100%; max-width: 900px; padding: 0 20px; box-sizing: border-box; }
-        .screen.active { display: flex; flex-direction: column; align-items: center; animation: fadeIn 0.4s ease; }
+        .screen { display: none; width: 100%; max-width: 1100px; padding: 0 20px; box-sizing: border-box; }
+        .screen.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Сетка персонажей */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; width: 100%; margin-top: 10px; }
+        /* Сетка карточек */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; width: 100%; margin-bottom: 30px;}
         
         .hero-card { 
-            background: var(--panel-bg); border: 1px solid #333; border-radius: 10px; 
-            padding: 15px; text-align: center; cursor: pointer; transition: 0.3s; 
-            position: relative; overflow: hidden;
+            background: var(--panel); border: 1px solid var(--border); border-radius: 12px; 
+            cursor: pointer; transition: 0.3s; overflow: hidden; position: relative;
+            backdrop-filter: blur(10px);
         }
-        .hero-card:hover { border-color: var(--blue); box-shadow: 0 0 15px rgba(0, 210, 255, 0.3); transform: translateY(-5px); }
+        .hero-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 42, 109, 0.3); }
+        .hero-card.selected { border: 2px solid var(--blue); box-shadow: 0 0 20px var(--blue); }
         
-        .hero-img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #222; margin: 0 auto 10px; background-color: #000; overflow: hidden; }
-        .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-img-box { width: 100%; height: 250px; background: #000; position: relative; overflow: hidden; }
+        .hero-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .hero-card:hover .hero-img-box img { transform: scale(1.1); }
         
-        .hero-name { font-family: 'Russo One', sans-serif; font-size: 18px; color: white; margin-bottom: 5px; }
-        .hero-desc { font-size: 11px; color: #888; margin-bottom: 10px; line-height: 1.3; }
+        /* Градиент снизу картинки, чтобы текст читался */
+        .hero-img-box::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(to top, rgba(15, 12, 41, 1), transparent);
+        }
+
+        .hero-info { padding: 15px; position: relative; z-index: 2; margin-top: -30px; }
+        .hero-name { font-family: 'Russo One', sans-serif; font-size: 20px; color: white; margin-bottom: 2px; }
+        .hero-universe { font-size: 11px; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: bold;}
         
-        .stat-row { display: flex; justify-content: space-between; font-size: 12px; color: #aaa; margin-bottom: 3px; }
-        .stat-row span:last-child { color: white; font-weight: bold; }
+        .stat-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-dim); margin-bottom: 3px; }
+        .stat-row span:last-child { color: white; font-weight: 800; }
 
         .btn { 
-            background: linear-gradient(90deg, #ff3366, #ff0055); border: none; color: white; 
-            padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; 
-            font-family: 'Russo One', sans-serif; font-size: 16px; transition: 0.3s; margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+            background: var(--accent); border: none; color: white; 
+            padding: 15px 40px; border-radius: 8px; cursor: pointer; 
+            font-family: 'Russo One', sans-serif; font-size: 16px; transition: 0.3s; text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.4);
         }
-        .btn:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(255, 0, 85, 0.6); }
-        
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 42, 109, 0.6); }
         .btn-outline { background: transparent; border: 2px solid var(--blue); color: var(--blue); box-shadow: none; }
-        .btn-outline:hover { background: rgba(0, 210, 255, 0.1); box-shadow: 0 0 15px rgba(0, 210, 255, 0.4); }
-
-        /* Слоты отряда */
-        .squad { display: flex; gap: 20px; justify-content: center; width: 100%; flex-wrap: wrap; margin-top: 20px; }
-        .squad-slot { 
-            width: 250px; height: 350px; background: var(--panel-bg); border: 2px dashed #444; 
-            border-radius: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            cursor: pointer; transition: 0.3s;
-        }
-        .squad-slot.filled { border: 2px solid var(--accent); box-shadow: 0 0 20px rgba(255, 51, 102, 0.2); }
-        .squad-slot:hover { border-color: var(--blue); }
+        .btn-outline:hover { background: rgba(5, 217, 232, 0.1); box-shadow: 0 0 15px rgba(5, 217, 232, 0.4); }
 
         /* Экран боя */
-        .battle-arena { display: flex; justify-content: space-between; width: 100%; margin-top: 20px; gap: 20px; }
-        .team { flex: 1; background: var(--panel-bg); border-radius: 10px; padding: 15px; border: 1px solid #333; }
-        .team.enemy { border-color: rgba(255, 51, 102, 0.5); }
-        .team.player { border-color: rgba(0, 210, 255, 0.5); }
-        
-        .battle-hero { display: flex; align-items: center; gap: 15px; background: #000; padding: 10px; border-radius: 8px; margin-bottom: 10px; }
-        .battle-hero .hero-img { width: 50px; height: 50px; margin: 0; border-width: 2px; }
-        .hp-bar-bg { flex-grow: 1; height: 10px; background: #222; border-radius: 5px; overflow: hidden; }
+        .battle-log { background: rgba(0,0,0,0.8); border: 1px solid var(--border); border-radius: 8px; padding: 15px; height: 120px; overflow-y: auto; font-family: monospace; font-size: 13px; color: var(--blue); margin-bottom: 20px; }
+        .hp-bar-bg { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 5px; }
         .hp-bar { height: 100%; background: var(--blue); transition: width 0.3s; }
         .hp-bar.enemy { background: var(--accent); }
-
-        .battle-log { width: 100%; height: 120px; background: #000; border: 1px solid #333; border-radius: 8px; margin-top: 20px; padding: 15px; overflow-y: auto; font-family: monospace; font-size: 12px; color: var(--blue); }
     </style>
 </head>
 <body>
 
-    <!-- Шапка -->
     <div class="header">
-        <div>⚡ ANIME ARENA</div>
-        <div class="wallet">Монеты: <span id="coins">1000</span></div>
+        <div class="logo">ANIME <span>ARENA</span></div>
+        <div class="wallet">Баланс: <span id="coins">1000</span></div>
     </div>
 
-    <!-- Вкладки -->
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('base', this)">Мой Отряд</button>
-        <button class="tab-btn" onclick="switchTab('roster', this)">База Героев</button>
+        <button class="tab-btn active" onclick="switchTab('roster', this)">Выбор Бойцов</button>
+        <button class="tab-btn" onclick="switchTab('arena', this)">На Арену</button>
         <button class="tab-btn" onclick="switchTab('shop', this)">Магазин</button>
-        <button class="tab-btn" onclick="switchTab('map', this)">На Арену</button>
     </div>
 
-    <div id="status" style="color: var(--blue); font-weight: 700; margin-bottom: 10px;">Соберите отряд из 3-х героев!</div>
-
-    <!-- ЭКРАН 1: МОЙ ОТРЯД -->
-    <div id="screen-base" class="screen active">
-        <div class="squad" id="squad-container"></div>
-        <button class="btn" style="max-width: 400px;" onclick="switchTab('map', document.querySelectorAll('.tab-btn')[3])">В БОЙ!</button>
+    <div id="screen-roster" class="screen active">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h2 style="font-family: 'Russo One'; margin: 0;">Выберите отряд</h2>
+            <div style="color: var(--text-dim); font-size: 14px; font-weight: bold;">Выбрано: <span id="squad-count" style="color: white;">0 / 3</span></div>
+        </div>
+        <div class="grid" id="roster-grid"></div>
     </div>
 
-    <!-- ЭКРАН 2: БАЗА ГЕРОЕВ -->
-    <div id="screen-roster" class="screen">
-        <p style="color: #888; margin-top: 0;">Кликните на героя, чтобы добавить его в свободный слот.</p>
-        <div class="grid" id="roster-container"></div>
+    <div id="screen-arena" class="screen">
+        <div style="background: var(--panel); border: 1px solid var(--border); padding: 30px; border-radius: 12px; text-align: center; backdrop-filter: blur(10px);">
+            <h2 style="font-family: 'Russo One'; margin-top: 0;">Арена ждет</h2>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">Вход: 100 монет. Победитель забирает 300 монет.</p>
+            <button class="btn" onclick="startBattle()">В БОЙ</button>
+        </div>
+        <div id="battle-screen" style="display: none; margin-top: 30px;">
+            <div class="battle-log" id="battle-log"></div>
+            <div id="battle-teams" style="display: flex; gap: 20px;"></div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-outline" onclick="closeBattle()">Завершить</button>
+            </div>
+        </div>
     </div>
 
-    <!-- ЭКРАН 3: МАГАЗИН -->
     <div id="screen-shop" class="screen">
-        <div style="background: var(--panel-bg); border: 1px solid var(--gold); padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);">
-            <h2 style="font-family: 'Russo One'; color: var(--gold); margin-top: 0;">Магазин</h2>
-            <p style="color: #aaa;">Пополните баланс для усиления отряда.</p>
-            <button class="btn" style="background: linear-gradient(90deg, #ffd700, #ff8c00); box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);" onclick="buyCoins()">Купить 500 монет</button>
+        <div style="background: var(--panel); border: 1px solid var(--border); padding: 30px; border-radius: 12px; text-align: center; backdrop-filter: blur(10px);">
+            <h2 style="font-family: 'Russo One'; margin-top: 0; color: var(--gold);">Пополнение</h2>
+            <button class="btn" style="background: var(--gold); color: black; box-shadow: 0 5px 15px rgba(255,215,0,0.4);" onclick="buyCoins()">Купить 500 монет</button>
         </div>
     </div>
 
-    <!-- ЭКРАН 4: КАРТА / АРЕНА -->
-    <div id="screen-map" class="screen">
-        <div style="text-align: center; margin-top: 20px;">
-            <h2 style="font-family: 'Russo One'; color: var(--accent);">Турнир на Арене</h2>
-            <p style="color: #aaa; margin-bottom: 30px;">Стоимость входа: 100 монет. Победитель забирает всё.</p>
-            <button class="btn" style="max-width: 300px; margin: 0 auto;" onclick="startBattle()">НАЧАТЬ БОЙ</button>
-        </div>
-    </div>
-
-    <!-- ЭКРАН 5: САМ БОЙ -->
-    <div id="screen-battle" class="screen">
-        <h2 style="font-family: 'Russo One'; color: white; margin-bottom: 10px;">ИДЕТ БИТВА</h2>
-        
-        <div class="battle-arena">
-            <!-- Сторона игрока -->
-            <div class="team player">
-                <h3 style="text-align: center; color: var(--blue); margin-top: 0;">ВАШ ОТРЯД</h3>
-                <div id="player-team"></div>
-            </div>
-            
-            <!-- Сторона врага -->
-            <div class="team enemy">
-                <h3 style="text-align: center; color: var(--accent); margin-top: 0;">ВРАГ</h3>
-                <div id="enemy-team"></div>
-            </div>
-        </div>
-
-        <!-- Лог боя -->
-        <div class="battle-log" id="battle-log"></div>
-
-        <!-- Кнопки управления боем -->
-        <div style="display: flex; gap: 10px; width: 100%;">
-            <button class="btn" onclick="nextTurn()">УДАРИТЬ</button>
-            <button class="btn btn-outline" onclick="switchTab('base', document.querySelectorAll('.tab-btn')[0])">СБЕЖАТЬ</button>
-        </div>
-    </div>
-
-    <!-- ПОДКЛЮЧАЕМ СКРИПТ (Сюда мы вставим логику в Части 3) -->
-        <script>
-        // --- БАЗА ГЕРОЕВ С НАСТОЯЩИМИ КАРТИНКАМИ ---
+    <script>
+                // --- БАЗА ГЕРОЕВ (Настоящие аниме-картинки) ---
         const allHeroes = [
-            { id: 1, name: "Гоку", img: "https://i.pinimg.com/736x/83/46/a2/8346a21cfcf2b1f0b2c6e7a67dfcc9f8.jpg", desc: "Супер Сайян. Бьет ки-волнами.", base: { str: 100, hp: 150 } },
-            { id: 2, name: "Наруто", img: "https://i.pinimg.com/originals/e4/43/26/e443269770b733efee1e1cf5e86cbe2f.jpg", desc: "Хокаге. Использует Расенган.", base: { str: 85, hp: 130 } },
-            { id: 3, name: "Луффи", img: "https://i.pinimg.com/736x/83/46/a2/8346a21cfcf2b1f0b2c6e7a67dfcc9f8.jpg", desc: "Король пиратов. Резиновый.", base: { str: 90, hp: 140 } },
-            { id: 4, name: "Леви", img: "https://i.pinimg.com/736x/de/3b/4a/de3b4a6cfdfe0a1c835d7f9d7e699f4c.jpg", desc: "Сильнейший солдат.", base: { str: 95, hp: 110 } },
-            { id: 5, name: "Саске", img: "https://i.pinimg.com/736x/2c/2f/f7/2c2ff7bbcf45cc5a116661833bfd7f4b.jpg", desc: "Последний Учиха.", base: { str: 88, hp: 120 } },
-            { id: 6, name: "Эрен", img: "https://i.pinimg.com/736x/93/f5/f5/93f5f5eb84a02fb44f7b10ccf9e34e45.jpg", desc: "Титан. Идет к свободе.", base: { str: 80, hp: 160 } }
+            { id: 1, name: "Гоку", uni: "Dragon Ball", img: "https://i.pinimg.com/736x/9c/3f/fb/9c3ffb45d11cbab5de280c8cb5b94bf6.jpg", base: { str: 100, hp: 150 } },
+            { id: 2, name: "Наруто", uni: "Naruto", img: "https://i.pinimg.com/736x/cb/5e/8f/cb5e8f57c7cb41735f53a4247373d352.jpg", base: { str: 85, hp: 130 } },
+            { id: 3, name: "Луффи", uni: "One Piece", img: "https://i.pinimg.com/736x/7c/4a/41/7c4a41f349f2f6b20f1cde4a242f344d.jpg", base: { str: 90, hp: 140 } },
+            { id: 4, name: "Леви", uni: "Attack on Titan", img: "https://i.pinimg.com/736x/e4/9f/87/e49f87b5d5f3bdd9d6e4ff4c44b52cb6.jpg", base: { str: 95, hp: 110 } },
+            { id: 5, name: "Саске", uni: "Naruto", img: "https://i.pinimg.com/736x/2a/2b/f7/2a2bf75b1eb5b5c5e5f5e5f5e5f5e5f5.jpg", base: { str: 88, hp: 120 } },
+            { id: 6, name: "Эрен", uni: "Attack on Titan", img: "https://i.pinimg.com/736x/3e/8a/8f/3e8a8fb3d268e0cf67cee4a65c467dc6.jpg", base: { str: 80, hp: 160 } },
+            { id: 7, name: "Танос", uni: "Marvel", img: "https://i.pinimg.com/736x/a5/5c/1e/a55c1e6e2eb2cfd9c6a1f4c5b4a3a2a1.jpg", base: { str: 110, hp: 180 } },
+            { id: 8, name: "Зоро", uni: "One Piece", img: "https://i.pinimg.com/736x/4a/2b/8f/4a2b8f5d5c6e7a8b9c0d1e2f3a4b5c6d.jpg", base: { str: 92, hp: 135 } }
         ];
 
         let coins = 1000;
-        let squad = [null, null, null];
-        let currentRosterFilter = 'all';
-        let pTeam = [], eTeam = [], battleInterval = null;
+        let squad = [];
+        let battleInterval = null;
 
         // Переключение вкладок
         function switchTab(tabId, btnElement) {
-            // Останавливаем бой, если он был
-            if (battleInterval) clearInterval(battleInterval);
-            
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('screen-' + tabId).classList.add('active');
             if (btnElement) btnElement.classList.add('active');
-            
-            if (tabId === 'base') renderSquad();
-            if (tabId === 'roster') renderRoster();
-            if (tabId === 'map') updateStatus("Готовы к бою?");
+            if (tabId === 'arena') document.getElementById('battle-screen').style.display = 'none';
         }
 
-        // --- ОТРИСОВКА ОТРЯДА ---
-        function renderSquad() {
-            const container = document.getElementById('squad-container');
+        // Отрисовка всех героев
+        function renderRoster() {
+            const container = document.getElementById('roster-grid');
             container.innerHTML = '';
-            
-            squad.forEach((hero, index) => {
-                if (hero === null) {
-                    container.innerHTML += `
-                        <div class="squad-slot" onclick="switchTab('roster', document.querySelectorAll('.tab-btn')[1])">
-                            <div style="font-size: 40px; color: #555;">+</div>
-                            <div style="color: #888; font-weight: bold; margin-top: 10px;">ПУСТО</div>
-                        </div>`;
-                } else {
-                    container.innerHTML += `
-                        <div class="squad-slot filled">
-                            <div class="hero-img"><img src="${hero.img}"></div>
+            allHeroes.forEach(hero => {
+                const isSelected = squad.find(h => h.id === hero.id);
+                container.innerHTML += `
+                    <div class="hero-card ${isSelected ? 'selected' : ''}" onclick="toggleSquad(${hero.id})">
+                        <div class="hero-img-box"><img src="${hero.img}"></div>
+                        <div class="hero-info">
                             <div class="hero-name">${hero.name}</div>
-                            <div class="hero-desc">${hero.desc}</div>
+                            <div class="hero-universe">${hero.uni}</div>
                             <div class="stat-row"><span>СИЛА:</span> <span>${hero.base.str}</span></div>
                             <div class="stat-row"><span>HP:</span> <span>${hero.base.hp}</span></div>
-                            <button class="btn btn-outline" style="margin-top: auto; border-color: #ff3366; color: #ff3366;" onclick="removeFromSquad(${index}, event)">Убрать</button>
-                        </div>`;
-                }
+                        </div>
+                    </div>
+                `;
             });
         }
 
-        // --- ОТРИСОВКА БАЗЫ ГЕРОЕВ ---
-        function renderRoster() {
-            const container = document.getElementById('roster-container');
-            container.innerHTML = '';
-            
-            allHeroes.forEach(hero => {
-                const inSquad = squad.find(h => h && h.id === hero.id);
-                if (!inSquad) {
-                    container.innerHTML += `
-                        <div class="hero-card" onclick="addToSquad(${hero.id})">
-                            <div class="hero-img"><img src="${hero.img}"></div>
-                            <div class="hero-name">${hero.name}</div>
-                            <div class="hero-desc">${hero.desc}</div>
-                            <div class="stat-row"><span>СИЛА:</span> <span>${hero.base.str}</span></div>
-                        </div>`;
-                }
-            });
+        // Добавление/удаление из отряда
+        function toggleSquad(heroId) {
+            const index = squad.findIndex(h => h.id === heroId);
+            if (index !== -1) {
+                squad.splice(index, 1);
+            } else {
+                if (squad.length >= 3) { alert("В отряд можно взять только 3-х бойцов!"); return; }
+                squad.push(allHeroes.find(h => h.id === heroId));
+            }
+            document.getElementById('squad-count').innerText = `${squad.length} / 3`;
+            renderRoster();
         }
 
-        // --- ДОБАВЛЕНИЕ И УДАЛЕНИЕ ---
-        function addToSquad(heroId) {
-            const emptyIndex = squad.indexOf(null);
-            if (emptyIndex === -1) { alert("В отряде уже 3 героя!"); return; }
-            
-            const heroToAdd = allHeroes.find(h => h.id === heroId);
-            squad[emptyIndex] = { ...heroToAdd };
-            updateStatus("Герой добавлен в отряд!");
-            switchTab('base', document.querySelectorAll('.tab-btn')[0]);
-        }
-
-        function removeFromSquad(index, event) {
-            event.stopPropagation();
-            squad[index] = null;
-            renderSquad();
-        }
-
-        // --- ПОКУПКА МОНЕТ (Имитация) ---
+        // Покупка монет
         async function buyCoins() {
             try {
                 const res = await fetch('/api/create-payment', { method: 'POST' });
                 const data = await res.json();
                 if (data.url) window.location.href = data.url;
             } catch (e) {
-                // Если сервер не отвечает, имитируем начисление локально
                 coins += 500;
                 document.getElementById('coins').innerText = coins;
-                alert("Тестовая оплата прошла! Начислено 500 монет.");
+                alert("Тестовая оплата! Начислено 500 монет.");
             }
         }
 
@@ -299,107 +221,103 @@
             if (urlParams.get('success') === 'true') {
                 coins += 500;
                 document.getElementById('coins').innerText = coins;
-                updateStatus("🎉 Оплата прошла! +500 монет.");
                 window.history.replaceState({}, document.title, "/");
             }
-            renderSquad();
+            renderRoster();
         };
 
-        // --- ЛОГИКА БОЯ ---
-        function updateStatus(text) {
-            document.getElementById('status').innerText = text;
-        }
-
+        // Запуск боя
         function startBattle() {
-            if (!squad[0] || !squad[1] || !squad[2]) { alert("Нужно собрать полный отряд из 3-х героев!"); return; }
-            if (coins < 100) { alert("Недостаточно монет для входа (нужно 100)!"); return; }
+            if (squad.length !== 3) { alert("Соберите отряд из 3-х бойцов!"); return; }
+            if (coins < 100) { alert("Недостаточно монет!"); return; }
             
             coins -= 100;
             document.getElementById('coins').innerText = coins;
             
-            // Переключаем экран
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById('screen-battle').classList.add('active');
-            
-            // Инициализация команд
-            pTeam = squad.map(h => ({ ...h, currentHp: h.base.hp, maxHp: h.base.hp, dmg: h.base.str }));
-            
-            eTeam = [];
-            const shuffled = [...allHeroes].sort(() => 0.5 - Math.random());
-            for(let i=0; i<3; i++) {
-                let enemy = shuffled[i];
-                eTeam.push({ ...enemy, name: "Враг: " + enemy.name, currentHp: enemy.base.hp + 50, maxHp: enemy.base.hp + 50, dmg: enemy.base.str });
-            }
-
-            document.getElementById('battle-log').innerHTML = "Бой начался!";
-            renderBattleUI();
-            
-            // Автоматический бой каждые 1.5 секунды
-            battleInterval = setInterval(nextTurn, 1500);
-        }
-
-        function renderBattleUI() {
-            document.getElementById('player-team').innerHTML = pTeam.map(h => `
-                <div class="battle-hero">
-                    <div class="hero-img"><img src="${h.img}"></div>
-                    <div style="flex-grow: 1;">
-                        <div style="font-size: 12px; color: #fff; margin-bottom: 4px;">${h.name}</div>
-                        <div class="hp-bar-bg"><div class="hp-bar" style="width: ${(h.currentHp/h.maxHp)*100}%"></div></div>
-                    </div>
-                </div>`).join('');
-                
-            document.getElementById('enemy-team').innerHTML = eTeam.map(h => `
-                <div class="battle-hero">
-                    <div class="hero-img"><img src="${h.img}"></div>
-                    <div style="flex-grow: 1;">
-                        <div style="font-size: 12px; color: #fff; margin-bottom: 4px;">${h.name}</div>
-                        <div class="hp-bar-bg"><div class="hp-bar enemy" style="width: ${(h.currentHp/h.maxHp)*100}%"></div></div>
-                    </div>
-                </div>`).join('');
-        }
-
-        function nextTurn() {
+            document.getElementById('battle-screen').style.display = 'block';
             const log = document.getElementById('battle-log');
+            log.innerHTML = "Бой начался...";
             
-            // Атака игрока
-            let targetE = eTeam.find(h => h.currentHp > 0);
-            let attackerP = pTeam.find(h => h.currentHp > 0);
-            if (targetE && attackerP) {
-                targetE.currentHp -= attackerP.dmg;
-                if (targetE.currentHp < 0) targetE.currentHp = 0;
-                log.innerHTML += `<br>⚔️ ${attackerP.name} наносит ${attackerP.dmg} урона по ${targetE.name}!`;
+            // Формируем команды
+            const pTeam = squad.map(h => ({ ...h, currentHp: h.base.hp, maxHp: h.base.hp, dmg: h.base.str }));
+            const eTeam = [];
+            for(let i=0; i<3; i++) {
+                let enemy = allHeroes[Math.floor(Math.random() * allHeroes.length)];
+                eTeam.push({ ...enemy, name: "Враг: " + enemy.name, currentHp: enemy.base.hp + 30, maxHp: enemy.base.hp + 30, dmg: enemy.base.str });
             }
 
-            // Проверка на победу
-            if (!eTeam.find(h => h.currentHp > 0)) {
-                clearInterval(battleInterval);
-                log.innerHTML += `<br><br><span style="color: #ffd700; font-weight: bold; font-size: 14px;">🏆 ПОБЕДА! Вы получаете 300 монет!</span>`;
-                coins += 300;
-                document.getElementById('coins').innerText = coins;
-                setTimeout(() => switchTab('base', document.querySelectorAll('.tab-btn')[0]), 3000);
-                return;
-            }
+            renderBattleTeams(pTeam, eTeam);
 
-            // Атака врага (с задержкой для визуала)
-            setTimeout(() => {
-                let targetP = pTeam.find(h => h.currentHp > 0);
-                let attackerE = eTeam.find(h => h.currentHp > 0);
-                if (targetP && attackerE) {
-                    targetP.currentHp -= attackerE.dmg;
-                    if (targetP.currentHp < 0) targetP.currentHp = 0;
-                    log.innerHTML += `<br><span style="color: #ff5555;">💥 ${attackerE.name} бьет ${targetP.name} на ${attackerE.dmg}!</span>`;
-                }
+            // Автоматический бой
+            battleInterval = setInterval(() => {
+                const log = document.getElementById('battle-log');
+                let targetE = eTeam.find(h => h.currentHp > 0);
+                let attackerP = pTeam.find(h => h.currentHp > 0);
                 
-                renderBattleUI();
-                log.scrollTop = log.scrollHeight;
-                
-                if (!pTeam.find(h => h.currentHp > 0)) {
-                    clearInterval(battleInterval);
-                    log.innerHTML += `<br><br><span style="color: #ff3366; font-weight: bold; font-size: 14px;">💀 ПОРАЖЕНИЕ.</span>`;
-                    setTimeout(() => switchTab('base', document.querySelectorAll('.tab-btn')[0]), 3000);
+                if (targetE && attackerP) {
+                    targetE.currentHp -= attackerP.dmg;
+                    if (targetE.currentHp < 0) targetE.currentHp = 0;
+                    log.innerHTML += `<br>${attackerP.name} наносит ${attackerP.dmg} урона!`;
                 }
-            }, 500);
+
+                setTimeout(() => {
+                    let targetP = pTeam.find(h => h.currentHp > 0);
+                    let attackerE = eTeam.find(h => h.currentHp > 0);
+                    if (targetP && attackerE) {
+                        targetP.currentHp -= attackerE.dmg;
+                        if (targetP.currentHp < 0) targetP.currentHp = 0;
+                        log.innerHTML += `<br><span style="color:#ff2a6d">${attackerE.name} наносит ${attackerE.dmg} урона!</span>`;
+                    }
+                    
+                    renderBattleTeams(pTeam, eTeam);
+                    log.scrollTop = log.scrollHeight;
+
+                    // Проверка победы
+                    if (!eTeam.find(h => h.currentHp > 0)) {
+                        clearInterval(battleInterval);
+                        log.innerHTML += `<br><br><span style="color:gold; font-weight:bold">ПОБЕДА! Вы получаете 300 монет.</span>`;
+                        coins += 300;
+                        document.getElementById('coins').innerText = coins;
+                    } else if (!pTeam.find(h => h.currentHp > 0)) {
+                        clearInterval(battleInterval);
+                        log.innerHTML += `<br><br><span style="color:red; font-weight:bold">ПОРАЖЕНИЕ.</span>`;
+                    }
+                }, 500);
+            }, 1500);
         }
-    </script>
-</body>
-</html>
+
+        // Отрисовка боя
+        function renderBattleTeams(pTeam, eTeam) {
+            const container = document.getElementById('battle-teams');
+            container.innerHTML = `
+                <div style="flex: 1; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
+                    <h3 style="color: var(--blue); margin-top: 0; text-align: center;">ВАШ ОТРЯД</h3>
+                    ${pTeam.map(h => `
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <img src="${h.img}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                            <div style="flex: 1;">
+                                <div style="font-size: 12px; color: #fff;">${h.name}</div>
+                                <div class="hp-bar-bg"><div class="hp-bar" style="width: ${(h.currentHp/h.maxHp)*100}%"></div></div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div style="flex: 1; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;">
+                    <h3 style="color: var(--accent); margin-top: 0; text-align: center;">ВРАГ</h3>
+                    ${eTeam.map(h => `
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                            <img src="${h.img}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                            <div style="flex: 1;">
+                                <div style="font-size: 12px; color: #fff;">${h.name}</div>
+                                <div class="hp-bar-bg"><div class="hp-bar enemy" style="width: ${(h.currentHp/h.maxHp)*100}%"></div></div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function closeBattle() {
+            clearInterval(battleInterval);
+            document.getElementById('battle-screen').style.display = 'none';
+        }
