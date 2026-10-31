@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>AnimeFight</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         :root { 
             --bg: #0b0914; 
@@ -33,24 +32,26 @@
         .logo { font-size: 24px; font-weight: 900; color: var(--text); display: flex; align-items: center; gap: 10px;}
         .logo span { color: var(--purple-light); }
         .nav { display: flex; gap: 25px; font-size: 14px; font-weight: 700; color: var(--text-dim); }
-        .nav a { color: inherit; text-decoration: none; transition: 0.3s; }
+        .nav a { color: inherit; text-decoration: none; cursor: pointer; }
         .nav a:hover, .nav a.active { color: var(--text); }
         
         .header-right { display: flex; gap: 15px; align-items: center; }
-        .search { background: #1a1629; border: 1px solid var(--border); border-radius: 8px; padding: 8px 15px; color: white; font-family: inherit; outline: none; }
-        .btn-auth { background: var(--purple); color: white; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn-auth:hover { background: var(--purple-light); }
+        .btn-auth { background: var(--purple); color: white; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; }
 
         /* Главный баннер */
         .banner {
-            width: 100%; height: 400px; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1920&auto=format&fit=crop'); /* Фон баннера */
+            width: 100%; height: 450px; 
+            /* Новая крутая заставка */
+            background: linear-gradient(to right, rgba(11,9,20,0.8) 0%, rgba(11,9,20,0.2) 50%, rgba(11,9,20,0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=2000&auto=format&fit=crop');
             background-size: cover; background-position: center;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; border-bottom: 2px solid var(--purple);
+            position: relative;
         }
-        .banner h1 { font-size: 56px; font-weight: 900; margin: 0; line-height: 1.1; text-shadow: 0 5px 20px rgba(0,0,0,0.8); }
-        .banner h1 span { color: var(--purple-light); }
-        .banner p { font-size: 18px; color: #ddd; margin: 15px 0 30px; font-weight: 500; }
+        .banner h1 { font-size: 64px; font-weight: 900; margin: 0; line-height: 1.1; text-shadow: 0 5px 20px rgba(0,0,0,0.8); font-style: italic;}
+        .banner h1 span { color: var(--purple-light); text-shadow: 0 0 20px var(--purple); }
+        .banner p { font-size: 18px; color: #ddd; margin: 15px 0 30px; font-weight: 600; text-shadow: 0 2px 5px #000;}
         .btn-main { background: var(--purple); color: white; border: none; padding: 15px 40px; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; transition: 0.3s; box-shadow: 0 0 20px rgba(138, 43, 226, 0.5); }
         .btn-main:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(138, 43, 226, 0.8); }
 
@@ -58,11 +59,11 @@
         .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; display: flex; gap: 30px; }
         .main-content { flex: 1; }
         
-        .section-title { font-size: 22px; font-weight: 900; display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .section-title { font-size: 24px; font-weight: 900; display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
         .section-title::before { content: ''; display: block; width: 6px; height: 24px; background: var(--purple-light); border-radius: 3px; }
 
         /* Сетка карточек */
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px; }
         
         .card {
             background: var(--panel); border: 1px solid var(--border); border-radius: 15px; overflow: hidden;
@@ -70,24 +71,27 @@
         }
         .card:hover { border-color: var(--purple-light); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2); }
         
-        .card-img-box { height: 180px; width: 100%; position: relative; }
-        .card-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .card-img-box { height: 200px; width: 100%; position: relative; display: flex; }
+        .card-img-box img { width: 50%; height: 100%; object-fit: cover; }
         
-        .vs-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 32px; font-weight: 900; color: white; font-style: italic; text-shadow: 0 0 10px var(--purple), 0 0 20px var(--purple); }
+        .vs-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 36px; font-weight: 900; color: white; font-style: italic; text-shadow: 0 0 10px #000, 0 0 20px var(--purple); }
         
         .card-info { padding: 15px; text-align: center; }
-        .card-title { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
-        .btn-small { background: var(--purple); color: white; border: none; padding: 8px 20px; border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: 0.3s; }
+        .card-title { font-size: 18px; font-weight: 800; margin-bottom: 15px; }
+        .btn-small { background: var(--purple); color: white; border: none; padding: 10px 25px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
         .btn-small:hover { background: var(--purple-light); }
 
         /* Боковая панель */
-        .sidebar { width: 350px; flex-shrink: 0; }
-        .sidebar-box { background: var(--panel); border: 1px solid var(--border); border-radius: 15px; padding: 20px; margin-bottom: 20px; }
+        .sidebar { width: 400px; flex-shrink: 0; }
+        .sidebar-box { background: var(--panel); border: 1px solid var(--border); border-radius: 15px; padding: 20px; }
         .sidebar-title { font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
         
         .api-item { background: #0f0c17; border: 1px solid var(--border); border-radius: 10px; padding: 15px; margin-bottom: 10px; }
         .api-item h4 { margin: 0 0 10px 0; font-size: 14px; color: var(--gold); }
-        .api-code { font-family: monospace; font-size: 11px; color: var(--text-dim); background: #000; padding: 5px 10px; border-radius: 5px; }
+        .api-code { font-family: monospace; font-size: 12px; color: var(--text-dim); background: #000; padding: 8px; border-radius: 5px; }
+        
+        /* Лог боя */
+        #battle-log { height: 250px; overflow-y: auto; background: #000; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 13px; color: #ccc; border: 1px solid var(--purple); margin-top: 10px;}
 
         /* Аниме карточки */
         .anime-card { position: relative; height: 200px; border-radius: 15px; overflow: hidden; cursor: pointer; }
@@ -101,14 +105,11 @@
     <header>
         <div class="logo">⚔️ Anime<span>Fight</span></div>
         <div class="nav">
-            <a href="#">Главная</a>
-            <a href="#" class="active">Бои</a>
+            <a href="#" class="active">Главная</a>
+            <a href="#">Бои</a>
             <a href="#">Магазин</a>
-            <a href="#">Рейтинг</a>
-            <a href="#">Новости</a>
         </div>
         <div class="header-right">
-            <input type="text" class="search" placeholder="Поиск...">
             <button class="btn-auth">Войти</button>
         </div>
     </header>
@@ -116,26 +117,21 @@
     <div class="banner">
         <h1>Аниме бои<br><span>онлайн</span></h1>
         <p>Сражайся, побеждай, поднимайся в рейтинге!</p>
-        <button class="btn-main" onclick="startBattle()">Начать бой →</button>
+        <button class="btn-main" onclick="startRandomFight()">Начать бой →</button>
     </div>
 
     <div class="container">
         <div class="main-content">
             <div class="section-title">Популярные бои</div>
-            <div class="cards-grid" id="heroes-grid">
-                <!-- Сюда будут подставляться карточки из скрипта -->
-            </div>
+            <div class="cards-grid" id="heroes-grid"></div>
 
             <div class="section-title">Популярные аниме</div>
-            <div class="cards-grid" id="anime-grid">
-                <!-- Сюда подставим аниме-карточки -->
-            </div>
+            <div class="cards-grid" id="anime-grid"></div>
         </div>
 
-        <!-- Боковая панель (Для препода) -->
         <div class="sidebar">
             <div class="sidebar-box">
-                <div class="sidebar-title">👨‍💻 API команды</div>
+                <div class="sidebar-title">💻 API команды</div>
                 <div class="api-item">
                     <h4>👑 Система турниров</h4>
                     <div class="api-code">GET /api/check-payment</div>
@@ -145,29 +141,26 @@
                     <div class="api-code">POST /api/create-payment</div>
                 </div>
                 <div class="api-item" style="border-color: var(--purple);">
-                    <h4 style="color: var(--purple-light);">⚔️ Проведение боя</h4>
-                    <div id="battle-log" style="font-size: 12px; color: #ccc; height: 100px; overflow-y: auto; background: #000; padding: 10px; border-radius: 5px; margin-top: 5px;">
-                        Ожидание боя...
-                    </div>
+                    <h4 style="color: var(--purple-light);">⚔️ Лог сражения</h4>
+                    <div id="battle-log">Ожидание запуска боя...</div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-                // --- БАЗА ГЕРОЕВ ---
+        // Реальные картинки с MyAnimeList (не блокируются)
         const allHeroes = [
-            { id: 1, name: "Наруто", uni: "Naruto", img: "https://cdn.myanimelist.net/images/characters/6/25399.jpg", base: { str: 85, hp: 130 } },
-            { id: 2, name: "Саске", uni: "Naruto", img: "https://cdn.myanimelist.net/images/characters/9/140833.jpg", base: { str: 88, hp: 120 } },
-            { id: 3, name: "Гоку", uni: "Dragon Ball", img: "https://cdn.myanimelist.net/images/characters/6/26359.jpg", base: { str: 100, hp: 150 } },
-            { id: 4, name: "Луффи", uni: "One Piece", img: "https://cdn.myanimelist.net/images/characters/9/310307.jpg", base: { str: 90, hp: 140 } },
-            { id: 5, name: "Зоро", uni: "One Piece", img: "https://cdn.myanimelist.net/images/characters/5/317051.jpg", base: { str: 92, hp: 135 } },
-            { id: 6, name: "Леви", uni: "Attack on Titan", img: "https://cdn.myanimelist.net/images/characters/2/241413.jpg", base: { str: 95, hp: 110 } },
-            { id: 7, name: "Эрен", uni: "Attack on Titan", img: "https://cdn.myanimelist.net/images/characters/10/216895.jpg", base: { str: 80, hp: 160 } },
-            { id: 8, name: "Ичиго", uni: "Bleach", img: "https://cdn.myanimelist.net/images/characters/3/11877.jpg", base: { str: 88, hp: 140 } }
+            { id: 1, name: "Наруто", img: "https://cdn.myanimelist.net/images/characters/6/25399.jpg", str: 85, hp: 130 },
+            { id: 2, name: "Саске", img: "https://cdn.myanimelist.net/images/characters/9/140833.jpg", str: 88, hp: 120 },
+            { id: 3, name: "Гоку", img: "https://cdn.myanimelist.net/images/characters/6/26359.jpg", str: 100, hp: 150 },
+            { id: 4, name: "Луффи", img: "https://cdn.myanimelist.net/images/characters/9/310307.jpg", str: 90, hp: 140 },
+            { id: 5, name: "Зоро", img: "https://cdn.myanimelist.net/images/characters/5/317051.jpg", str: 92, hp: 135 },
+            { id: 6, name: "Леви", img: "https://cdn.myanimelist.net/images/characters/2/241413.jpg", str: 95, hp: 110 },
+            { id: 7, name: "Эрен", img: "https://cdn.myanimelist.net/images/characters/10/216895.jpg", str: 80, hp: 160 },
+            { id: 8, name: "Ичиго", img: "https://cdn.myanimelist.net/images/characters/3/11877.jpg", str: 88, hp: 140 }
         ];
 
-        // --- КАРТИНКИ АНИМЕ (Для нижнего блока) ---
         const animes = [
             { name: "Naruto", img: "https://cdn.myanimelist.net/images/anime/13/17405.jpg" },
             { name: "One Piece", img: "https://cdn.myanimelist.net/images/anime/6/73245.jpg" },
@@ -176,33 +169,32 @@
             { name: "Bleach", img: "https://cdn.myanimelist.net/images/anime/3/40451.jpg" }
         ];
 
-        // --- ОТРИСОВКА КАРТОЧЕК БОЕВ ---
-        function renderPopularFights() {
+        // Отрисовка карточек боев
+        function renderFights() {
             const grid = document.getElementById('heroes-grid');
             grid.innerHTML = '';
             
-            // Берем первые 3 пары для отображения
+            // Берем первые 3 пары
             for (let i = 0; i < 3; i++) {
                 const h1 = allHeroes[i * 2];
                 const h2 = allHeroes[i * 2 + 1];
-                
                 grid.innerHTML += `
-                    <div class="card" onclick="quickFight(${h1.id}, ${h2.id})">
+                    <div class="card">
                         <div class="card-img-box">
-                            <img src="${h1.img}" style="width: 50%; float: left; border-right: 2px solid var(--purple);">
-                            <img src="${h2.img}" style="width: 50%; float: right;">
+                            <img src="${h1.img}">
+                            <img src="${h2.img}">
                             <div class="vs-text">VS</div>
                         </div>
                         <div class="card-info">
                             <div class="card-title">${h1.name} vs ${h2.name}</div>
-                            <button class="btn-small">▶ Смотреть</button>
+                            <button class="btn-small" onclick="runBattle(${h1.id}, ${h2.id})">▶ Смотреть</button>
                         </div>
                     </div>
                 `;
             }
         }
 
-        // --- ОТРИСОВКА АНИМЕ (Нижний блок) ---
+        // Отрисовка аниме
         function renderAnimes() {
             const grid = document.getElementById('anime-grid');
             grid.innerHTML = '';
@@ -216,54 +208,60 @@
             });
         }
 
-        // --- БЫСТРЫЙ БОЙ ПО КЛИКУ НА КАРТОЧКУ ---
-        function quickFight(id1, id2) {
+        // ЗАПУСК БОЯ (Работает!)
+        function runBattle(id1, id2) {
             const h1 = allHeroes.find(h => h.id === id1);
             const h2 = allHeroes.find(h => h.id === id2);
             
             const log = document.getElementById('battle-log');
-            log.innerHTML = `<span style="color:var(--purple-light)">Бой: ${h1.name} vs ${h2.name}</span><br>`;
+            log.innerHTML = `<span style="color:var(--gold)">Бой начался: ${h1.name} против ${h2.name}!</span><br><br>`;
             
-            let hp1 = h1.base.hp;
-            let hp2 = h2.base.hp;
+            let hp1 = h1.hp;
+            let hp2 = h2.hp;
             let turn = 1;
 
-            const interval = setInterval(() => {
+            // Очищаем старый интервал, если был
+            if (window.battleInterval) clearInterval(window.battleInterval);
+
+            window.battleInterval = setInterval(() => {
                 if (hp1 <= 0 || hp2 <= 0) {
-                    clearInterval(interval);
+                    clearInterval(window.battleInterval);
                     const winner = hp1 > 0 ? h1.name : h2.name;
-                    log.innerHTML += `<br><span style="color:var(--gold); font-weight:bold;">🏆 Победил ${winner}!</span>`;
+                    log.innerHTML += `<br><span style="color:#00ff00; font-weight:bold; font-size:15px;">🏆 Победил ${winner}!</span>`;
                     log.scrollTop = log.scrollHeight;
                     return;
                 }
 
                 if (turn % 2 !== 0) {
-                    hp2 -= h1.base.str;
-                    log.innerHTML += `<br>⚔️ ${h1.name} бьет на ${h1.base.str} (У ${h2.name} осталось ${Math.max(0, hp2)} HP)`;
+                    hp2 -= h1.str;
+                    log.innerHTML += `<br>⚔️ <span style="color:#fff">${h1.name}</span> бьет на <span style="color:var(--purple-light)">${h1.str}</span> (У ${h2.name} осталось ${Math.max(0, hp2)} HP)`;
                 } else {
-                    hp1 -= h2.base.str;
-                    log.innerHTML += `<br>💥 ${h2.name} бьет на ${h2.base.str} (У ${h1.name} осталось ${Math.max(0, hp1)} HP)`;
+                    hp1 -= h2.str;
+                    log.innerHTML += `<br>💥 <span style="color:#fff">${h2.name}</span> бьет на <span style="color:#ff5555">${h2.str}</span> (У ${h1.name} осталось ${Math.max(0, hp1)} HP)`;
                 }
                 turn++;
                 log.scrollTop = log.scrollHeight;
-            }, 800);
+            }, 600); // Скорость боя (600мс)
         }
 
-        // --- ОСНОВНАЯ КНОПКА "НАЧАТЬ БОЙ" ---
-        function startBattle() {
+        // Кнопка "Начать бой" в баннере
+        function startRandomFight() {
             const log = document.getElementById('battle-log');
-            log.innerHTML = `<span style="color:var(--purple-light)">Поиск случайного соперника...</span><br>`;
+            log.innerHTML = `<span style="color:var(--gold)">Поиск случайного соперника...</span>`;
             
             setTimeout(() => {
                 const shuffled = [...allHeroes].sort(() => 0.5 - Math.random());
-                const p1 = shuffled[0];
-                const p2 = shuffled[1];
-                quickFight(p1.id, p2.id);
-            }, 1000);
+                runBattle(shuffled[0].id, shuffled[1].id);
+                // Прокручиваем экран к логу боя
+                document.querySelector('.sidebar-box').scrollIntoView({behavior: 'smooth'});
+            }, 800);
         }
 
-        // Запускаем отрисовку при загрузке страницы
+        // Запуск при загрузке
         window.onload = () => {
-            renderPopularFights();
+            renderFights();
             renderAnimes();
         };
+    </script>
+</body>
+</html>
