@@ -26,74 +26,44 @@
             display: flex; flex-direction: column; align-items: center;
         }
 
-        .header { 
-            display: flex; justify-content: space-between; width: 100%; max-width: 1100px; 
-            font-family: 'Russo One', sans-serif; font-size: 26px; margin: 20px 0; 
-            align-items: center; padding: 0 20px; box-sizing: border-box;
-        }
-        
+        .header { display: flex; justify-content: space-between; width: 100%; max-width: 1100px; font-family: 'Russo One', sans-serif; font-size: 26px; margin: 20px 0; align-items: center; padding: 0 20px; box-sizing: border-box; }
         .logo { text-shadow: 0 0 15px var(--accent); }
         .logo span { color: var(--accent); }
-        
-        .wallet { 
-            background: rgba(0, 0, 0, 0.5); border: 2px solid var(--gold); 
-            padding: 8px 20px; border-radius: 8px; font-size: 18px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-        }
+        .wallet { background: rgba(0, 0, 0, 0.5); border: 2px solid var(--gold); padding: 8px 20px; border-radius: 8px; font-size: 18px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); }
         .wallet span { color: var(--gold); }
 
         .tabs { display: flex; gap: 10px; margin-bottom: 30px; width: 100%; max-width: 1100px; padding: 0 20px; box-sizing: border-box; }
-        .tab-btn { 
-            background: rgba(0,0,0,0.4); color: var(--text-dim); border: 1px solid var(--border); 
-            padding: 12px 30px; font-family: 'Russo One', sans-serif; font-size: 16px;
-            cursor: pointer; transition: 0.3s; border-radius: 8px; text-transform: uppercase;
-        }
-        .tab-btn.active { 
-            background: var(--panel); color: white; border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 42, 109, 0.3);
-        }
+        .tab-btn { background: rgba(0,0,0,0.4); color: var(--text-dim); border: 1px solid var(--border); padding: 12px 30px; font-family: 'Russo One', sans-serif; font-size: 16px; cursor: pointer; transition: 0.3s; border-radius: 8px; text-transform: uppercase; }
+        .tab-btn.active { background: var(--panel); color: white; border-color: var(--accent); box-shadow: 0 0 15px rgba(255, 42, 109, 0.3); }
 
         .screen { display: none; width: 100%; max-width: 1100px; padding: 0 20px; box-sizing: border-box; }
         .screen.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Сетка карточек */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; width: 100%; margin-bottom: 30px;}
         
-        .hero-card { 
-            background: var(--panel); border: 1px solid var(--border); border-radius: 12px; 
-            cursor: pointer; transition: 0.3s; overflow: hidden; position: relative;
-            backdrop-filter: blur(10px);
-        }
+        .hero-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; cursor: pointer; transition: 0.3s; overflow: hidden; position: relative; backdrop-filter: blur(10px); }
         .hero-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 42, 109, 0.3); }
         .hero-card.selected { border: 2px solid var(--blue); box-shadow: 0 0 20px var(--blue); }
         
         .hero-img-box { width: 100%; height: 250px; background: #000; position: relative; overflow: hidden; }
         .hero-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .hero-card:hover .hero-img-box img { transform: scale(1.1); }
-        
-        /* Градиент снизу картинки, чтобы текст читался */
-        .hero-img-box::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
-            background: linear-gradient(to top, rgba(15, 12, 41, 1), transparent);
-        }
+        .hero-img-box::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(15, 12, 41, 1), transparent); }
 
         .hero-info { padding: 15px; position: relative; z-index: 2; margin-top: -30px; }
         .hero-name { font-family: 'Russo One', sans-serif; font-size: 20px; color: white; margin-bottom: 2px; }
-        .hero-universe { font-size: 11px; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: bold;}
+        .hero-universe { font-size: 11px; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: bold;}
+        .hero-desc { font-size: 11px; color: #ccc; margin-bottom: 10px; line-height: 1.4; }
         
         .stat-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-dim); margin-bottom: 3px; }
         .stat-row span:last-child { color: white; font-weight: 800; }
 
-        .btn { 
-            background: var(--accent); border: none; color: white; 
-            padding: 15px 40px; border-radius: 8px; cursor: pointer; 
-            font-family: 'Russo One', sans-serif; font-size: 16px; transition: 0.3s; text-transform: uppercase;
-            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.4);
-        }
+        .btn { background: var(--accent); border: none; color: white; padding: 15px 40px; border-radius: 8px; cursor: pointer; font-family: 'Russo One', sans-serif; font-size: 16px; transition: 0.3s; text-transform: uppercase; box-shadow: 0 5px 15px rgba(255, 42, 109, 0.4); }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 42, 109, 0.6); }
         .btn-outline { background: transparent; border: 2px solid var(--blue); color: var(--blue); box-shadow: none; }
         .btn-outline:hover { background: rgba(5, 217, 232, 0.1); box-shadow: 0 0 15px rgba(5, 217, 232, 0.4); }
 
-        /* Экран боя */
         .battle-log { background: rgba(0,0,0,0.8); border: 1px solid var(--border); border-radius: 8px; padding: 15px; height: 120px; overflow-y: auto; font-family: monospace; font-size: 13px; color: var(--blue); margin-bottom: 20px; }
         .hp-bar-bg { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 5px; }
         .hp-bar { height: 100%; background: var(--blue); transition: width 0.3s; }
@@ -144,23 +114,22 @@
     </div>
 
     <script>
-                // --- БАЗА ГЕРОЕВ (Настоящие аниме-картинки) ---
+        // ИСПОЛЬЗУЕМ КАРТИНКИ С MYANIMELIST (ОНИ НЕ БЛОКИРУЮТСЯ)
         const allHeroes = [
-            { id: 1, name: "Гоку", uni: "Dragon Ball", img: "https://i.pinimg.com/736x/9c/3f/fb/9c3ffb45d11cbab5de280c8cb5b94bf6.jpg", base: { str: 100, hp: 150 } },
-            { id: 2, name: "Наруто", uni: "Naruto", img: "https://i.pinimg.com/736x/cb/5e/8f/cb5e8f57c7cb41735f53a4247373d352.jpg", base: { str: 85, hp: 130 } },
-            { id: 3, name: "Луффи", uni: "One Piece", img: "https://i.pinimg.com/736x/7c/4a/41/7c4a41f349f2f6b20f1cde4a242f344d.jpg", base: { str: 90, hp: 140 } },
-            { id: 4, name: "Леви", uni: "Attack on Titan", img: "https://i.pinimg.com/736x/e4/9f/87/e49f87b5d5f3bdd9d6e4ff4c44b52cb6.jpg", base: { str: 95, hp: 110 } },
-            { id: 5, name: "Саске", uni: "Naruto", img: "https://i.pinimg.com/736x/2a/2b/f7/2a2bf75b1eb5b5c5e5f5e5f5e5f5e5f5.jpg", base: { str: 88, hp: 120 } },
-            { id: 6, name: "Эрен", uni: "Attack on Titan", img: "https://i.pinimg.com/736x/3e/8a/8f/3e8a8fb3d268e0cf67cee4a65c467dc6.jpg", base: { str: 80, hp: 160 } },
-            { id: 7, name: "Танос", uni: "Marvel", img: "https://i.pinimg.com/736x/a5/5c/1e/a55c1e6e2eb2cfd9c6a1f4c5b4a3a2a1.jpg", base: { str: 110, hp: 180 } },
-            { id: 8, name: "Зоро", uni: "One Piece", img: "https://i.pinimg.com/736x/4a/2b/8f/4a2b8f5d5c6e7a8b9c0d1e2f3a4b5c6d.jpg", base: { str: 92, hp: 135 } }
+            { id: 1, name: "Гоку", uni: "Dragon Ball", img: "https://cdn.myanimelist.net/images/characters/6/26359.jpg", desc: "Супер Сайян. Бьет ки-волнами.", base: { str: 100, hp: 150 } },
+            { id: 2, name: "Наруто", uni: "Naruto", img: "https://cdn.myanimelist.net/images/characters/6/25399.jpg", desc: "Седьмой Хокаге. Владеет Расенганом.", base: { str: 85, hp: 130 } },
+            { id: 3, name: "Луффи", uni: "One Piece", img: "https://cdn.myanimelist.net/images/characters/9/310307.jpg", desc: "Король пиратов. Резиновый человек.", base: { str: 90, hp: 140 } },
+            { id: 4, name: "Леви", uni: "Attack on Titan", img: "https://cdn.myanimelist.net/images/characters/2/241413.jpg", desc: "Сильнейший солдат человечества.", base: { str: 95, hp: 110 } },
+            { id: 5, name: "Саске", uni: "Naruto", img: "https://cdn.myanimelist.net/images/characters/9/140833.jpg", desc: "Последний Учиха. Владеет Шаринганом.", base: { str: 88, hp: 120 } },
+            { id: 6, name: "Эрен", uni: "Attack on Titan", img: "https://cdn.myanimelist.net/images/characters/10/216895.jpg", desc: "Носитель Титана. Идет к свободе.", base: { str: 80, hp: 160 } },
+            { id: 7, name: "Зоро", uni: "One Piece", img: "https://cdn.myanimelist.net/images/characters/5/317051.jpg", desc: "Мечник. Стиль трех мечей.", base: { str: 92, hp: 135 } },
+            { id: 8, name: "Ичиго", uni: "Bleach", img: "https://cdn.myanimelist.net/images/characters/3/11877.jpg", desc: "Синигами. Заменяет души.", base: { str: 88, hp: 140 } }
         ];
 
         let coins = 1000;
         let squad = [];
         let battleInterval = null;
 
-        // Переключение вкладок
         function switchTab(tabId, btnElement) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -169,7 +138,6 @@
             if (tabId === 'arena') document.getElementById('battle-screen').style.display = 'none';
         }
 
-        // Отрисовка всех героев
         function renderRoster() {
             const container = document.getElementById('roster-grid');
             container.innerHTML = '';
@@ -181,6 +149,7 @@
                         <div class="hero-info">
                             <div class="hero-name">${hero.name}</div>
                             <div class="hero-universe">${hero.uni}</div>
+                            <div class="hero-desc">${hero.desc}</div>
                             <div class="stat-row"><span>СИЛА:</span> <span>${hero.base.str}</span></div>
                             <div class="stat-row"><span>HP:</span> <span>${hero.base.hp}</span></div>
                         </div>
@@ -189,7 +158,6 @@
             });
         }
 
-        // Добавление/удаление из отряда
         function toggleSquad(heroId) {
             const index = squad.findIndex(h => h.id === heroId);
             if (index !== -1) {
@@ -202,7 +170,6 @@
             renderRoster();
         }
 
-        // Покупка монет
         async function buyCoins() {
             try {
                 const res = await fetch('/api/create-payment', { method: 'POST' });
@@ -215,7 +182,6 @@
             }
         }
 
-        // Проверка возврата после оплаты
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('success') === 'true') {
@@ -226,7 +192,6 @@
             renderRoster();
         };
 
-        // Запуск боя
         function startBattle() {
             if (squad.length !== 3) { alert("Соберите отряд из 3-х бойцов!"); return; }
             if (coins < 100) { alert("Недостаточно монет!"); return; }
@@ -238,7 +203,6 @@
             const log = document.getElementById('battle-log');
             log.innerHTML = "Бой начался...";
             
-            // Формируем команды
             const pTeam = squad.map(h => ({ ...h, currentHp: h.base.hp, maxHp: h.base.hp, dmg: h.base.str }));
             const eTeam = [];
             for(let i=0; i<3; i++) {
@@ -248,7 +212,6 @@
 
             renderBattleTeams(pTeam, eTeam);
 
-            // Автоматический бой
             battleInterval = setInterval(() => {
                 const log = document.getElementById('battle-log');
                 let targetE = eTeam.find(h => h.currentHp > 0);
@@ -272,7 +235,6 @@
                     renderBattleTeams(pTeam, eTeam);
                     log.scrollTop = log.scrollHeight;
 
-                    // Проверка победы
                     if (!eTeam.find(h => h.currentHp > 0)) {
                         clearInterval(battleInterval);
                         log.innerHTML += `<br><br><span style="color:gold; font-weight:bold">ПОБЕДА! Вы получаете 300 монет.</span>`;
@@ -286,7 +248,6 @@
             }, 1500);
         }
 
-        // Отрисовка боя
         function renderBattleTeams(pTeam, eTeam) {
             const container = document.getElementById('battle-teams');
             container.innerHTML = `
@@ -321,3 +282,6 @@
             clearInterval(battleInterval);
             document.getElementById('battle-screen').style.display = 'none';
         }
+    </script>
+</body>
+</html>
